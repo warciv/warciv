@@ -1,0 +1,113 @@
+package org.freeciv.servlet;
+
+import org.apache.commons.io.FileUtils;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.regex.Pattern;
+
+import org.freeciv.services.Validation;
+import org.freeciv.util.Constants;
+
+
+/**
+ * Submit game results to Hall of Fame.
+ *
+ * URL: /hall_of_fame_post
+ */
+public class HallOfFamePost extends HttpServlet {
+
+    private final Validation validation = new Validation();
+    
+    private final String PATTERN_VALIDATE_ALPHA_NUMERIC = "[0-9a-zA-Z \\.]*";
+    
+    private final Pattern p = Pattern.compile(PATTERN_VALIDATE_ALPHA_NUMERIC);
+    
+    private static final String mapSrcImgPaths = "/var/lib/tomcat10/webapps/data/savegames/";
+    
+    private static final String mapDstImgPaths = "/var/lib/tomcat10/webapps/data/mapimgs/";
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+
+        String username = java.net.URLDecoder.decode(request.getParameter("username"), StandardCharsets.UTF_8);
+        String nation = java.net.URLDecoder.decode(request.getParameter("nation"), StandardCharsets.UTF_8);
+        String score = java.net.URLDecoder.decode(request.getParameter("score"), StandardCharsets.UTF_8);
+        String turn = java.net.URLDecoder.decode(request.getParameter("turn"), StandardCharsets.UTF_8);
+        String port = java.net.URLDecoder.decode(request.getParameter("port"), StandardCharsets.UTF_8);
+        String ipAddress = request.getHeader("X-Real-IP");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
+
+        if (!validation.isValidUsername(username)) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+                    "Invalid username. Please try again with another username.");
+            return;
+        }
+
+        if (!p.matcher(score).matches() || !p.matcher(turn).matches()) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+                    "Invalid data submitted. ");
+            return;
+        }
+
+        Connection conn = null;
+        try {
+            Thread.sleep(200);
+
+            Context env = (Context) (new InitialContext().lookup(Constants.JNDI_CONNECTION));
+            DataSource ds = (DataSource) env.lookup(Constants.JNDI_DDBBCON_MYSQL);
+            conn = ds.getConnection();
+
+            String idQuery = "select max(id) from hall_of_fame";
+            PreparedStatement maxStmt = conn.prepareStatement(idQuery);
+            ResultSet rs =  maxStmt.executeQuery();
+            int newId = 1;
+            while (rs.next()) {
+                newId = rs.getInt(1) + 1;
+            }
+
+            File mapimg = new File(mapSrcImgPaths + "map-" + Integer.parseInt(port) + ".map.gif");
+            if (mapimg.exists()) {
+                FileUtils.moveFileToDirectory(mapimg, new File(mapDstImgPaths), true);
+                File resultFile = new File(mapDstImgPaths + "map-" + Integer.parseInt(port) + ".map.gif");
+                resultFile.renameTo(new File(mapDstImgPaths + newId + ".gif"));
+            }
+
+            String query = "INSERT INTO hall_of_fame (username, nation, score, end_turn, end_date, ip) "
+                    + "VALUES (?, ?, ?, ?, NOW(), ?)";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, nation);
+            preparedStatement.setString(3, score);
+            preparedStatement.setString(4, turn);
+            preparedStatement.setString(5, ipAddress);
+            preparedStatement.executeUpdate();
+
+        } catch (Exception err) {
+            response.setHeader("result", "error");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unable to submit to Hall of Fame: " + err);
+        } finally {
+            if (conn != null)
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+
+    }
+
+}
