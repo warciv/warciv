@@ -16,11 +16,11 @@ FCIV.NET is a game about history. The developers of this game encourages peace a
 Live servers
 ------------
 Currently known servers based on FCIV.NET / Freeciv-web, which are open source in compliance with [the AGPL license](LICENSE.md):
-- [fciv.net](https://www.fciv.net) - https://github.com/fciv-net/fciv-net
+
 
 FCIV-NET screenshots:
 ------------------------
-![Freeciv-web](https://raw.githubusercontent.com/fciv-net/fciv-net/main/doc/img/Screenshot.png "FCIV.NET screenshot")
+![Freeciv-web](https://raw.githubusercontent.com/freeciv3d/freeciv3d/main/doc/img/Screenshot.png "FCIV.NET screenshot")
 
 
 Overview
