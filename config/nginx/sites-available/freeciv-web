@@ -2,7 +2,8 @@
 
     server {
         listen       80;
-        include /etc/nginx/snippets/freeciv-web-ssl.conf;
+        # diabled 2024
+        #include /etc/nginx/snippets/freeciv-web-ssl.conf;
         tcp_nodelay on; 
  
         gzip  on;
