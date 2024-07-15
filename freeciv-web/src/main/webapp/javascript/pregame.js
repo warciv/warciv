@@ -1236,6 +1236,7 @@ function create_new_freeciv_user_account_request(action_type)
   var password = $("#password").val().trim();
   var confirm_password = $("#confirm_password").val().trim();
   var email = $("#email").val().trim();
+  var captcha = $("#g-recaptcha-response").val();
 
   $("#username_validation_result").show();
   if (!is_username_valid_show(username)) {
@@ -1264,33 +1265,27 @@ function create_new_freeciv_user_account_request(action_type)
   shaObj.update(password);
   var sha_password = encodeURIComponent(shaObj.getHash("HEX"));
 
-    grecaptcha.ready(function() {
-        grecaptcha.execute(captcha_site_key, {action: 'homepage'}).then(function(token) {
-            $.ajax({
-                type: 'POST',
-                url: "/create_pbem_user?username=" + encodeURIComponent(username) + "&email=" + encodeURIComponent(email)
-                    + "&password=" + sha_password + "&captcha=" + encodeURIComponent(token),
-                success: function(data, textStatus, request){
-                    simpleStorage.set("username", username);
-                    simpleStorage.set("password", password);
-                    if (data.substring(0,2) == "OK") {
-                        userid = data.split(",")[1];
-                        simpleStorage.set("userid", userid);
-                    }
+  $.ajax({
+   type: 'POST',
+   url: "/create_pbem_user?username=" + encodeURIComponent(username) + "&email=" + encodeURIComponent(email)
+            + "&password=" + sha_password + "&captcha=" + encodeURIComponent(captcha),
+   success: function(data, textStatus, request){
+       simpleStorage.set("username", username);
+       simpleStorage.set("password", password);
+       if (data.substring(0,2) == "OK") {
+         userid = data.split(",")[1];
+         simpleStorage.set("userid", userid);
+       }
 
-                    $("#dialog").dialog('close');
-                    logged_in_with_password = true;
-                    init_sprites();
-                },
-                error: function (request, textStatus, errorThrown) {
-                    $("#dialog").parent().show();
-                    swal("Creating new user failed.");
-                }
-            });
-        });
-    });
-
-
+       $("#dialog").dialog('close');
+       logged_in_with_password = true;
+       init_sprites();
+      },
+   error: function (request, textStatus, errorThrown) {
+     $("#dialog").parent().show();
+     swal("Creating new user failed.");
+   }
+  });
 }
 
 /**************************************************************************
@@ -1414,7 +1409,71 @@ function onloadCallback() {
 function forgot_pbem_password()
 {
 
-  swal("Unsupported.");
+  var title = "Forgot your password?";
+  var message = "Please enter your e-mail address to reset your password. Also complete the captcha. The new password will be sent to you by e-mail.<br><br>"
+                + "<table><tr><td>E-mail address:</td><td><input id='email_reset' type='text' size='25'></td></tr>"
+                + "</table><br><br>"
+                + "<div id='captcha_element'></div>"
+                + "<br><br>";
+
+  // reset dialog page.
+  $("#pwd_dialog").remove();
+  $("<div id='pwd_dialog'></div>").appendTo("div#game_page");
+
+  $("#pwd_dialog").html(message);
+  $("#pwd_dialog").attr("title", title);
+  $("#pwd_dialog").dialog({
+			bgiframe: true,
+			modal: true,
+			width: is_small_screen() ? "80%" : "40%",
+			buttons:
+			{
+                "Cancel" : function() {
+	                 $("#pwd_dialog").remove();
+				},
+				"Send password" : function() {
+				    password_reset_count++;
+                    if (password_reset_count > 3) {
+                      swal("Unable to reset password.");
+                      return;
+                    }
+				    var reset_email = $("#email_reset").val();
+				    var captcha = $("#g-recaptcha-response").val();
+				    if (reset_email == null || reset_email.length == 0) {
+				      swal("Please fill in e-mail.");
+				      return;
+				    }
+				    if (captcha_site_key != '' && (captcha == null || captcha.length == 0)) {
+				      swal("Please fill complete the captcha.");
+				      return;
+				    }
+                    $.ajax({
+                       type: 'POST',
+                       url: "/reset_password?email=" + reset_email + "&captcha=" + encodeURIComponent(captcha),
+                       success: function(data, textStatus, request){
+                          swal("Password reset. Please check your email.");
+                          $("#pwd_dialog").remove();
+                        },
+                       error: function (request, textStatus, errorThrown) {
+                         swal("Error, password was not reset.");
+                       }
+                      });
+				}
+			}
+		});
+
+  $("#pwd_dialog").dialog('open');
+
+  if (captcha_site_key != '') {
+    if (grecaptcha !== undefined && grecaptcha != null) {
+      $('#captcha_element').html('');
+      grecaptcha.render('captcha_element', {
+            'sitekey' : captcha_site_key
+          });
+    } else {
+      swal("Captcha not available. This could be caused by a browser plugin.");
+    }
+  }
 
 }
 
