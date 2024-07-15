@@ -118,9 +118,8 @@ var webgpu = <%= webgpu %>;
 <meta name="google-signin-client_id" content="<%= googleSigninClientKey %>">
 
 <script>var captcha_site_key = '<%= captchaKey %>';</script>
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-    async defer>
-</script>
+<script src="https://www.google.com/recaptcha/api.js?render=<%= captchaKey %>"></script>
+
 
 <style>
 	/*
