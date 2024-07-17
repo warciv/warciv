@@ -28,7 +28,7 @@ body
 #freeciv_logo {
   float:left; 
   background: #444444 url(/images/freeciv-web-logo.png);
-  width: 138px; 
+  width: 169px;
   height: 35px; 
   margin-right: 10px;
 }
