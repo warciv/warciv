@@ -36,8 +36,6 @@
 		    <li><a href="/hall_of_fame">Hall of Fame</a></li>
 
 		    <li><a href="/about">About</a></li>
-
-	            <li><a href="https://www.twitter.com/fcivnet">@Fcivnet</a></li>
 </ul>
 		</div><!-- end navbar-collapse -->
 	</div><!-- end container-fluid -->
