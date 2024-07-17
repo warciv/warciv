@@ -23,7 +23,7 @@ https://Warciv.net
 
 WARCIV screenshots:
 ------------------------
-![Freeciv-web](https://raw.githubusercontent.com/freeciv3d/freeciv3d/main/doc/img/Screenshot.png "FCIV.NET screenshot")
+![Freeciv-web](https://raw.githubusercontent.com/warciv/warciv/main/doc/img/Screenshot.png "FCIV.NET screenshot")
 
 
 Overview
@@ -61,7 +61,7 @@ Check out Freeciv-web to a
 directory on your computer, by installing [Git](http://git-scm.com/) and
 running this command:
  ```bash
-  git clone https://github.com/freeciv3d/freeciv3d.git --depth=10
+  git clone https://github.com/warciv/warciv.git --depth=10
  ```
 
 You may also want to change some parameters before installing, although
