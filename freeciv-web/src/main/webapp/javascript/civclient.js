@@ -1,5 +1,5 @@
 /**********************************************************************
-    Freeciv-web - the web version of Freeciv. http://www.fciv.net/
+    Freeciv-web - the web version of Freeciv. http://www.Warciv.net/
     Copyright (C) 2009-2015  The Freeciv-web project
 
     This program is free software: you can redistribute it and/or modify
@@ -47,7 +47,7 @@ var dialog_close_trigger = "";
 var dialog_message_close_task;
 
 /**************************************************************************
- Main starting point for FCIV.NET
+ Main starting point for Warciv.net
 **************************************************************************/
 $(document).ready(function() {
   civclient_init();
@@ -148,12 +148,12 @@ function civclient_init()
 **************************************************************************/
 function init_common_intro_dialog() {
   if (observing) {
-    show_intro_dialog("Welcome to Fciv.net",
+    show_intro_dialog("Welcome to Warciv.net",
       "You have joined the game as an observer. Please enter your name:");
     $("#turn_done_button").button( "option", "disabled", true);
 
   } else if (is_small_screen()) {
-      show_intro_dialog("Welcome to Fciv.net",
+      show_intro_dialog("Welcome to Warciv.net",
         "You are about to join the game. Please enter your name:");
   } else if ($.getUrlVar('action') == "earthload") {
     show_intro_dialog("Welcome to Freeciv-web",
@@ -161,7 +161,7 @@ function init_common_intro_dialog() {
       "Please enter your name: ");
 
   } else if ($.getUrlVar('action') == "load") {
-    show_intro_dialog("Welcome to Fciv.net",
+    show_intro_dialog("Welcome to Warciv.net",
       "You are about to join this game server, where you can " +
       "load a savegame, tutorial, custom map generated from an image or a historical scenario map. " +
       "Please enter your name: ");
@@ -172,10 +172,10 @@ function init_common_intro_dialog() {
                   "participate in a multiplayer game. You can customize the game " +
                   "settings, and wait for the minimum number of players before " +
                   "the game can start. ";
-      show_intro_dialog("Welcome to Fciv.net", msg);
+      show_intro_dialog("Welcome to Warciv.net", msg);
 
   } else {
-    show_intro_dialog("Welcome to Fciv.net",
+    show_intro_dialog("Welcome to Warciv.net",
       "You can now play a game of Freeciv, where you can " +
       "play a singleplayer game against the Freeciv AI or multiplayer. You can " +
       "start the game directly by entering any name, or customize the game settings. " +

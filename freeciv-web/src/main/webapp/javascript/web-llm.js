@@ -1,5 +1,5 @@
 /**********************************************************************
- Fciv.net - the web version of Freeciv. http://www.fciv.net/
+ Warciv.net - the web version of Freeciv. http://www.Warciv.net/
  Copyright (C) 2009-2024  The Freeciv-web project
 
  This program is free software: you can redistribute it and/or modify

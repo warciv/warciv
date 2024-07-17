@@ -41,8 +41,8 @@ try {
 <link rel="stylesheet" href="/css/fontawesome.min.css">
 <link rel="stylesheet" href="/css/solid.min.css">
 <link rel="stylesheet" type="text/css" href="/css/webclient.min.css?ts=${initParam.buildTimeStamp}" />
-<meta name="description" content="Fciv.net - play Freeciv in 3D online for free; open source strategy game">
-<meta property="og:image" content="https://fciv.net/static/images/freeciv-webgl-splash-48.png" />
+<meta name="description" content="Warciv.net - play Freeciv in 3D online for free; open source strategy game">
+<meta property="og:image" content="https://Warciv.net/static/images/freeciv-webgl-splash-48.png" />
 
 <script type="text/javascript">
 var ts="${initParam.buildTimeStamp}";
@@ -124,7 +124,7 @@ var webgpu = <%= webgpu %>;
 
 <style>
 	/*
-		FCIV.NET - Freeciv 3D.
+		WARCIV.NET - Freeciv 3D.
 	 */
 	body {
 		padding-top: 60px;
@@ -191,7 +191,7 @@ var webgpu = <%= webgpu %>;
 
 <body>
 
-  <div id="introtxtja">FCIV.NET is the 3D version of the strategy game Freeciv. Because Civilization should be free!</div>
+  <div id="introtxtja">WARCIV.NET is the 3D version of the strategy game Freeciv. Because Civilization should be free, in 3D!</div>
 
     <div class="container">
         <%@include file="/WEB-INF/jsp/fragments/header.jsp"%>

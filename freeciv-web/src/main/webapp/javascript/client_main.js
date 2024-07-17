@@ -1,5 +1,5 @@
 /**********************************************************************
-    Freeciv-web - the web version of Freeciv. http://www.fciv.net/
+    Freeciv-web - the web version of Freeciv. http://www.Warciv.net/
     Copyright (C) 2009-2015  The Freeciv-web project
 
     This program is free software: you can redistribute it and/or modify
@@ -199,7 +199,7 @@ function show_new_game_message()
 
   } else if (client.conn.playing != null && !game_loaded) {
     var pplayer = client.conn.playing;
-    message = "Welcome to FCIV.NET, the free browser-based 3D version of the classic turn-based strategy game Freeciv! Have fun! "
+    message = "Welcome to Warciv.net, the free browser-based 3D version of the classic turn-based strategy game Freeciv! Have fun! "
         + ( mentat_enabled ? "You can ask questions to the AI assistant in the Mentat tab." : "") ;
 
   } else if (game_loaded) {

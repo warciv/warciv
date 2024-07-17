@@ -1,6 +1,6 @@
 /**********************************************************************
-    OpenAI - the 3D web version of Freeciv. http://www.fciv.net/
-    Copyright (C) 2009-2023  The FCIV.NET project
+    OpenAI - the 3D web version of Freeciv. http://www.Warciv.net/
+    Copyright (C) 2009-2023  The Warciv.net project
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by

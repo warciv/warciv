@@ -29,9 +29,9 @@
 				
 				</ul>
 			</li>
-			<li><a href="https://github.com/fciv-net/fciv-net">GitHub</a></li>
+			<li><a href="https://github.com/warciv/warciv/">GitHub</a></li>
 
-			<li><a href="https://discord.gg/baFdjpNpTR">Discord</a></li>
+			<li><a href="https://discord.gg/fCQGbd8y">Discord</a></li>
 
 		    <li><a href="/hall_of_fame">Hall of Fame</a></li>
 
