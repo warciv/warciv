@@ -2,7 +2,7 @@ Warciv.net
 ----------
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Build Status](https://github.com/freeciv3d/freeciv3d/workflows/continuous%20integration/badge.svg)](https://github.com/fciv-net/fciv-net/actions?query=workflow%3A%22continuous+integration%22)
+[![Build Status](https://github.com/warciv/warciv/workflows/continuous%20integration/badge.svg)](https://github.com/warciv/warciv/actions?query=workflow%3A%22continuous+integration%22)
 
 
 [Warciv.net](https://www.warciv.net) is an open-source turn-based strategy game. It can be played in a web-browser which supports HTML5 and WebGL 2 or WebGPU. The game features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players (multiplayer) or play by yourself against the computer.
@@ -19,7 +19,7 @@ Currently known servers based on Warciv.net / Freeciv-web, which are open source
 
 https://Warciv.net
 
-FCIV-NET screenshots:
+WARCIV screenshots:
 ------------------------
 ![Freeciv-web](https://raw.githubusercontent.com/freeciv3d/freeciv3d/main/doc/img/Screenshot.png "FCIV.NET screenshot")
 
@@ -27,7 +27,7 @@ FCIV-NET screenshots:
 Overview
 --------
 
-Freeciv-Web consists of these components:
+Warciv.net consists of these components:
 
 * [Freeciv-web](freeciv-web) - a Java web application for the Freeciv-web client.
   This application is a Java web application which make up the application
@@ -51,7 +51,7 @@ Freeciv 3D
 -------------
 Freeciv 3D is the 3D version using the Three.js 3D engine, which requires WebGl 2 or WebGPU support.
 
-Running Freeciv-web on your computer
+Running Warciv.net on your computer
 ------------------------------------
 The recommended and probably easiest way is to use Docker. Freeciv-web can also be run with WSL. In some cases it may be easier.
 
@@ -72,7 +72,7 @@ copy it without the `.dist` extension and edit to your liking.
 All software components in Freeciv-web will log to the /logs sub-directory of the Freeciv-web installation.
 
 
-### Running Freeciv-web on Docker
+### Running Warciv on Docker
 
 Freeciv-web can easily be built and run from Docker using `docker-compose`.
 
@@ -98,10 +98,10 @@ Start and stop Freeciv-web with the following commands:
 ### Running Freeciv-web on Windows Subsystem for Linux (WSL)
 [Windows Subsystem for Linux (WSL)](/doc/Windows%20Subsystem%20for%20Linux.md)
 
-Developers interested in Freeciv-web
+Developers interested in Warciv
 ------------------------------------
 
-If you want to contibute to Freeciv-web, see the [issues](https://github.com/fciv-net/fciv-net/issues) on GibHub for some tasks you can work on. Pull requests and suggestions/issues on Github are welcome! 
+If you want to contibute to Warciv, see the [issues](https://github.com/fciv-net/fciv-net/issues) on GibHub for some tasks you can work on. Pull requests and suggestions/issues on Github are welcome! 
 
 
 Contributors to Freeciv-web
