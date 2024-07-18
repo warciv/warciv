@@ -61,7 +61,7 @@ function init_chatbox()
 
   $(".chatbox_dialog").css("top", "52px");
   $(".chatbox_dialog").css("left", "3px");
-    $("#game_chatbox_panel").parent().css("background", "transparent");
+  $("#game_chatbox_panel").parent().css("background", "rgba(0, 0, 0, 0.7)");
 
   $("#game_chatbox_panel").parent().css("z-index","100"); // ensure it can always be opened/closed/never covered
   $("#game_chatbox_panel").parent().css("overflow", "hidden"); // make it immune to glitches making standard scrollbars (it already has a custom)
