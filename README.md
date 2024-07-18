@@ -3,6 +3,8 @@ Warciv.net
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Build Status](https://github.com/warciv/warciv/workflows/continuous%20integration/badge.svg)](https://github.com/warciv/warciv/actions?query=workflow%3A%22continuous+integration%22)
+[![DeepScan grade](https://deepscan.io/api/teams/18818/projects/27599/branches/883782/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=18818&pid=27599&bid=883782)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/6a68f770365842afb89b83811e166124)](https://app.codacy.com/gh/warciv/warciv/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 
 [Warciv.net](https://www.warciv.net) is an open-source turn-based strategy game. It can be played in a web-browser which supports HTML5 and WebGL 2 or WebGPU. The game features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players (multiplayer) or play by yourself against the computer.
@@ -21,7 +23,7 @@ https://Warciv.net
 
 WARCIV screenshots:
 ------------------------
-![Freeciv-web](https://raw.githubusercontent.com/freeciv3d/freeciv3d/main/doc/img/Screenshot.png "FCIV.NET screenshot")
+![Freeciv-web](https://raw.githubusercontent.com/warciv/warciv/main/doc/img/Screenshot.png "FCIV.NET screenshot")
 
 
 Overview
@@ -59,7 +61,7 @@ Check out Freeciv-web to a
 directory on your computer, by installing [Git](http://git-scm.com/) and
 running this command:
  ```bash
-  git clone https://github.com/freeciv3d/freeciv3d.git --depth=10
+  git clone https://github.com/warciv/warciv.git --depth=10
  ```
 
 You may also want to change some parameters before installing, although
