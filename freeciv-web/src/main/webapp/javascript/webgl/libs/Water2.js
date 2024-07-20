@@ -185,6 +185,11 @@ class Water extends Mesh {
 
 		this.onBeforeRender = function ( renderer, scene, camera ) {
 
+			if (Math.random() < 0.75) {
+				// "Performance optimization for Freeciv 3D."
+				return;
+			}
+
 			updateTextureMatrix( camera );
 			updateFlow();
 
