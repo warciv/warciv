@@ -73,9 +73,7 @@ function webgl_start_renderer()
 
   console.log("Three.js " + THREE.REVISION);
   THREE.ColorManagement.enabled = true;
-  if (webgpu) {
-    console.log("WebGPU experimental renderer.");
-  }
+
 
   container = document.getElementById('mapcanvas');
   camera = new THREE.PerspectiveCamera( 45, new_mapview_width / new_mapview_height, 1, 12000 );
@@ -95,15 +93,14 @@ function webgl_start_renderer()
   spotlight = new THREE.SpotLight( 0xffffff, 2.9 * Math.PI, 0, Math.PI / 3, 0.001, 0.5);
   scene.add( spotlight );
 
-  if (!webgpu) {
-    spotlight.castShadow = true;
-    spotlight.shadow.camera.near = 100;
-    spotlight.shadow.camera.far = 3000;
-    spotlight.shadow.bias = 0.0001;
 
-    spotlight.shadow.mapSize.x = 4096;
-    spotlight.shadow.mapSize.y = 4096;
-  }
+  spotlight.castShadow = true;
+  spotlight.shadow.camera.near = 100;
+  spotlight.shadow.camera.far = 3000;
+  spotlight.shadow.bias = 0.0001;
+
+  spotlight.shadow.mapSize.x = 4096;
+  spotlight.shadow.mapSize.y = 4096;
 
   var enable_antialiasing = graphics_quality >= QUALITY_MEDIUM;
   var stored_antialiasing_setting = simpleStorage.get("antialiasing_setting", "");
@@ -111,16 +108,9 @@ function webgl_start_renderer()
     enable_antialiasing = false;
   }
 
-  if (!webgpu) {
-    maprenderer = new THREE.WebGLRenderer( { antialias: enable_antialiasing, preserveDrawingBuffer: true } );
 
-    maprenderer.outputColorSpace = THREE.LinearSRGBColorSpace;
-
-  } else {
-    maprenderer = new THREE.WebGPURenderer( { antialias: enable_antialiasing, preserveDrawingBuffer: true } );
-    if (maprenderer.backend.isWebGLBackend) console.log("WebGL backend");
-    if (maprenderer.backend.isWebGPUBackend) console.log("WebGPU backend");
-  }
+  maprenderer = new THREE.WebGLRenderer( { antialias: enable_antialiasing, preserveDrawingBuffer: true } );
+  maprenderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
   maprenderer.setPixelRatio(window.devicePixelRatio);
   maprenderer.setSize(new_mapview_width, new_mapview_height);
@@ -131,7 +121,7 @@ function webgl_start_renderer()
     anaglyph_effect.setSize( new_mapview_width, new_mapview_height );
   }
 
-  animate();
+  animate_webgl();
 
   if (is_small_screen()) {
     camera_dx = 38 * 1.35;
@@ -152,7 +142,7 @@ function init_webgl_mapview() {
   var vertex_shader = $('#terrain_vertex_shh').html();
   var fragment_shader = $('#terrain_fragment_shh').html();
 
-  if (!webgpu && maprenderer.capabilities.maxTextures <= 16) {
+  if (maprenderer.capabilities.maxTextures <= 16) {
     delete tiletype_terrains["irrigation"];
     console.log("max textures: " + maprenderer.capabilities.maxTextures);
     fragment_shader = fragment_shader.replace("uniform sampler2D irrigation;", "")
@@ -160,8 +150,7 @@ function init_webgl_mapview() {
   }
 
   /* uniforms are variables which are used in the fragment shader fragment.js */
-  if (!webgpu) { 
-    freeciv_uniforms = {
+  freeciv_uniforms = {
       maptiles: { type: "t", value: maptiletypes },
       borders: { type: "t", value: borders_texture },
       map_x_size: { type: "f", value: map['xsize'] },
@@ -180,7 +169,7 @@ function init_webgl_mapview() {
       var terrain_name = tiletype_terrains[i];
       freeciv_uniforms[terrain_name] = {type: "t", value: webgl_textures[terrain_name]};
     }
-  }
+
   init_heightmap(terrain_quality);
   update_heightmap(terrain_quality);
 
@@ -198,16 +187,13 @@ function init_webgl_mapview() {
   }
 
   // High-resolution terrain-mesh shown in mapview.
-  if (!webgpu) {
-    terrain_material = new THREE.ShaderMaterial({
+  terrain_material = new THREE.ShaderMaterial({
       uniforms: freeciv_uniforms,
       vertexShader: vertex_shader,
       fragmentShader: fragment_shader,
       vertexColors: true
     });
-  } else {
-    terrain_material = new THREE.MeshStandardMaterial({"color" : 0x008800});
-  }
+
 
   landGeometry = new THREE.BufferGeometry();
   init_land_geometry(landGeometry, terrain_quality);
@@ -217,7 +203,7 @@ function init_webgl_mapview() {
   landMesh.castShadow = false;
   scene.add(landMesh);
 
-  if (!webgpu && graphics_quality === QUALITY_HIGH) {
+  if (graphics_quality === QUALITY_HIGH) {
     var shadowMaterial = new THREE.ShadowMaterial();
     shadowMaterial.opacity = 0.85;
     shadowmesh = new THREE.Mesh( landGeometry, shadowMaterial);
@@ -229,9 +215,8 @@ function init_webgl_mapview() {
   update_map_terrain_geometry();
   setInterval(update_map_terrain_geometry, 40);
 
-  if (!webgpu) {
-    setInterval(update_map_known_tiles, 15);
-  }
+
+  setInterval(update_map_known_tiles, 15);
 
   add_quality_dependent_objects();
   add_all_objects_to_scene();
@@ -302,7 +287,6 @@ function init_land_geometry(geometry, mesh_quality)
   geometry.setAttribute( 'uv', new THREE.Float32BufferAttribute( uvs, 2 ) );
 
   geometry.computeVertexNormals();
-
 
 
   return geometry;
@@ -382,9 +366,9 @@ function update_map_known_tiles()
 }
 
 /****************************************************************************
-  Main animation method
+  Main animation method for WebGL.
 ****************************************************************************/
-function animate() {
+function animate_webgl() {
   if (scene == null) return;
   if (stats != null) stats.begin();
   if (mapview_slide['active']) update_map_slide_3d();
@@ -414,8 +398,7 @@ function animate() {
   if (stats != null) stats.end();
   if (initial_benchmark_enabled || benchmark_enabled) benchmark_frames_count++;
 
-
-  requestAnimationFrame(animate);
+  requestAnimationFrame(animate_webgl);
 }
 
 
@@ -426,7 +409,7 @@ function add_quality_dependent_objects()
 {
   var waterGeometry = new THREE.PlaneGeometry( mapview_model_width, mapview_model_height);
 
-  if (!webgpu && graphics_quality === QUALITY_HIGH) {
+  if (graphics_quality === QUALITY_HIGH) {
     scene.remove(water);
     water = new Water(waterGeometry, {
       color: '#55c0ff',
@@ -489,6 +472,4 @@ function add_quality_dependent_objects()
   } else {
     scene.background = null;
   }
-
-
 }
