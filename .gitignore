@@ -81,3 +81,5 @@ tests/screenshot*.png
 .freeciv_index
 .idea
 *.iml
+*zone.identifier
+*Zone.Identifier
