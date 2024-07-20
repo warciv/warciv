@@ -1,6 +1,6 @@
 /**********************************************************************
     Warciv.net - the web version of Freeciv. http://www.Warciv.net/
-    Copyright (C) 2009-2022  The Freeciv-web project
+    Copyright (C) 2009-2024  The Freeciv-web project
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -111,6 +111,7 @@ function webgl_start_renderer()
 
   maprenderer = new THREE.WebGLRenderer( { antialias: enable_antialiasing, preserveDrawingBuffer: true } );
   maprenderer.outputColorSpace = THREE.LinearSRGBColorSpace;
+  maprenderer.frustumCulled = true;
 
   maprenderer.setPixelRatio(window.devicePixelRatio);
   maprenderer.setSize(new_mapview_width, new_mapview_height);
@@ -174,7 +175,7 @@ function init_webgl_mapview() {
   update_heightmap(terrain_quality);
 
   // Low-resolution terrain mesh used for raycasting to find mouse postition.
-  var lofiMaterial = new THREE.MeshStandardMaterial({"color" : 0x00ff00});
+  var lofiMaterial = new THREE.MeshBasicMaterial({"color" : 0x00ff00});
   lofiGeometry = new THREE.BufferGeometry();
   init_land_geometry(lofiGeometry, 2);
   update_land_geometry(lofiGeometry, 2);
@@ -218,7 +219,8 @@ function init_webgl_mapview() {
 
   setInterval(update_map_known_tiles, 15);
 
-  add_quality_dependent_objects();
+  add_quality_dependent_objects_webgl();
+
   add_all_objects_to_scene();
 
   benchmark_start = new Date().getTime();
@@ -287,7 +289,6 @@ function init_land_geometry(geometry, mesh_quality)
   geometry.setAttribute( 'uv', new THREE.Float32BufferAttribute( uvs, 2 ) );
 
   geometry.computeVertexNormals();
-
 
   return geometry;
 }
@@ -405,7 +406,7 @@ function animate_webgl() {
 /****************************************************************************
  ...
  ****************************************************************************/
-function add_quality_dependent_objects()
+function add_quality_dependent_objects_webgl()
 {
   var waterGeometry = new THREE.PlaneGeometry( mapview_model_width, mapview_model_height);
 
@@ -436,7 +437,7 @@ function add_quality_dependent_objects()
   water.castShadow = false;
   scene.add( water );
 
-  if (!webgpu && graphics_quality === QUALITY_HIGH) {
+  if (graphics_quality === QUALITY_HIGH) {
     if (shadowmesh == null) {
       var shadowMaterial = new THREE.ShadowMaterial();
       shadowMaterial.opacity = 0.85;
@@ -459,7 +460,7 @@ function add_quality_dependent_objects()
   var hours = new Date().getHours();
   var is_day = hours > 6 && hours < 20;
 
-  if (!webgpu && graphics_quality === QUALITY_HIGH) {
+  if (graphics_quality === QUALITY_HIGH) {
     if (is_day) {
       const sky = new THREE.WebGLCubeRenderTarget(webgl_textures["skybox"].image.height);
       sky.fromEquirectangularTexture(maprenderer, webgl_textures["skybox"]);
