@@ -31,7 +31,7 @@ var tiletype_terrains = ["coast","ocean","arctic","desert","grassland","hills","
 
 var landGeometry;
 var landMesh; // the terrain land geometry
-var water;
+var water_hq, water_lq;
 var shadowmesh;
 
 var lofiGeometry;
@@ -399,6 +399,17 @@ function animate_webgl() {
   if (stats != null) stats.end();
   if (initial_benchmark_enabled || benchmark_enabled) benchmark_frames_count++;
 
+
+  if (water_hq != null && water_lq != null) {
+    if (camera.position.y > 460) {
+      water_hq.visible = false;
+      water_lq.visible = true;
+    } else {
+      water_hq.visible = true;
+      water_lq.visible = false;
+    }
+  }
+
   requestAnimationFrame(animate_webgl);
 }
 
@@ -410,10 +421,10 @@ function add_quality_dependent_objects_webgl()
 {
   var waterGeometry = new THREE.PlaneGeometry( mapview_model_width, mapview_model_height);
 
-  if (graphics_quality === QUALITY_HIGH) {
-    scene.remove(water);
-    water = new Water(waterGeometry, {
-      color: '#55c0ff',
+  // Water with shader, high quality, near view.
+  scene.remove(water_hq);
+  water_hq = new Water(waterGeometry, {
+      color: '#84d1ff',
       scale: 10,
       flowDirection: new THREE.Vector2( 0.1, -0.1),
       textureWidth: 1024,
@@ -423,19 +434,28 @@ function add_quality_dependent_objects_webgl()
       normalMap0 : webgl_textures["water1"],
       normalMap1 : webgl_textures["water2"]
     });
-  } else {
-    scene.remove(water);
-    let water_material = new THREE.MeshBasicMaterial( { color: 0x4b4bd0, transparent: true, opacity: 0.4} );
-    water = new THREE.Mesh(waterGeometry, water_material);
 
-  }
-  water.rotation.x = - Math.PI * 0.5;
-  water.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 50);
-  water.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), Math.floor(mapview_model_width / 2) - 500);
-  water.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), -mapview_model_height / 2);
-  water.renderOrder = -1; // Render water first, this will sove transparency issues in city labels.
-  water.castShadow = false;
-  scene.add( water );
+  water_hq.rotation.x = - Math.PI * 0.5;
+  water_hq.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 50);
+  water_hq.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), Math.floor(mapview_model_width / 2) - 500);
+  water_hq.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), -mapview_model_height / 2);
+  water_hq.renderOrder = -1; // Render water first, this will sove transparency issues in city labels.
+  water_hq.castShadow = false;
+  scene.add( water_hq );
+
+  // Water with low quality, far away view.
+  scene.remove(water_lq);
+  let water_material = new THREE.MeshBasicMaterial( { color: 0x3f37ba, transparent: true, opacity: 0.5} );
+  water_lq = new THREE.Mesh(waterGeometry, water_material);
+
+  water_lq.rotation.x = - Math.PI * 0.5;
+  water_lq.translateOnAxis(new THREE.Vector3(0,0,1).normalize(), 50);
+  water_lq.translateOnAxis(new THREE.Vector3(1,0,0).normalize(), Math.floor(mapview_model_width / 2) - 500);
+  water_lq.translateOnAxis(new THREE.Vector3(0,1,0).normalize(), -mapview_model_height / 2);
+  water_lq.renderOrder = -1; // Render water first, this will sove transparency issues in city labels.
+  water_lq.castShadow = false;
+  water_lq.visible = false;
+  scene.add( water_lq );
 
   if (graphics_quality === QUALITY_HIGH) {
     if (shadowmesh == null) {

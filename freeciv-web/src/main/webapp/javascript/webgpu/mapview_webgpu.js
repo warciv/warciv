@@ -183,7 +183,7 @@ function add_quality_dependent_objects_webgpu()
     scene.add( water );
 
     maprenderer.shadowMap.enabled = false;
-    
+
     scene.background = null;
 
 }

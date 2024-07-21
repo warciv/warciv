@@ -515,7 +515,7 @@ void main()
             border_e.r != border_color.r || border_e.g != border_color.g || border_e.b != border_color.b ||
             border_w.r != border_color.r || border_w.g != border_color.g || border_w.b != border_color.b)  {
             c = border_color.rbg;
-        } else if (vPosition_camera.z > 900.0) {
+        } else if (vPosition_camera.z > 1000.0) {
             c = mix(c, border_color.rbg, 0.70);
         } else {
            c = mix(c, border_color.rbg, 0.10);
