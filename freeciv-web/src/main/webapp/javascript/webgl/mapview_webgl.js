@@ -401,7 +401,7 @@ function animate_webgl() {
 
 
   if (water_hq != null && water_lq != null) {
-    if (camera.position.y > 460) {
+    if (camera.position.y > 400) {
       water_hq.visible = false;
       water_lq.visible = true;
     } else {
@@ -445,7 +445,7 @@ function add_quality_dependent_objects_webgl()
 
   // Water with low quality, far away view.
   scene.remove(water_lq);
-  let water_material = new THREE.MeshBasicMaterial( { color: 0x3f37ba, transparent: true, opacity: 0.5} );
+  let water_material = new THREE.MeshBasicMaterial( { color: 0x3730a3, transparent: true, opacity: 0.5} );
   water_lq = new THREE.Mesh(waterGeometry, water_material);
 
   water_lq.rotation.x = - Math.PI * 0.5;
