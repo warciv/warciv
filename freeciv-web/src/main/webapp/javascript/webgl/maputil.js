@@ -77,7 +77,7 @@ function webgl_canvas_pos_to_tile_quick(x, y) {
 
   raycaster.setFromCamera( mouse, camera );
 
-  var intersects = raycaster.intersectObject(water, false);
+  var intersects = raycaster.intersectObject(water_lq, false);
 
   raycaster.layers.set(6);
 
