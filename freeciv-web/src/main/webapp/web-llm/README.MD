@@ -5,11 +5,12 @@ Uses web-llm:
 https://github.com/mlc-ai/web-llm
 
 The code here is a fork of:
-https://github.com/mlc-ai/web-llm/tree/main/examples/simple-chat
+https://github.com/mlc-ai/web-llm/tree/main/examples/simple-chat-js
 
 TinyLLM:
 https://github.com/jasonacox/TinyLLM
 
+Updated: 2024-07-21
 
 TODO:
 ======
