@@ -196,7 +196,12 @@ function init_options_dialog()
   $('#graphics_quality_options').change(function() {
     graphics_quality = parseFloat($('#graphics_quality_options').val());
     simpleStorage.set("graphics_quality", graphics_quality);
-    add_quality_dependent_objects();
+    if (!webgpu) {
+      add_quality_dependent_objects_webgl();
+    } else {
+      add_quality_dependent_objects_webgpu();
+    }
+
   });
   $("#graphics_quality_options").val(graphics_quality);
 
