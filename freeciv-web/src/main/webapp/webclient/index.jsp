@@ -34,7 +34,7 @@ try {
 <!DOCTYPE html>
 <html>
 <head>
-<title>Warciv.net - 3D browser version of the turn-based strategy game Freeciv.</title>
+<title>Warciv.net - Freeciv 3D browser version of the turn-based strategy game.</title>
 
 <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 

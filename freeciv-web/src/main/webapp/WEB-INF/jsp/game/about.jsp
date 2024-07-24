@@ -268,7 +268,7 @@
 
                     <div class="col-md-6">
 		                  <div class="vcontainer">
-                                        <iframe  src="https://www.youtube.com/embed/cZfxUkveZvk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="video"></iframe>
+                                        <iframe  src="https://www.youtube.com/embed/tjy1f2_S8hk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="video"></iframe>
                                         </div>
                                   </div>
 			
@@ -301,7 +301,7 @@
 					</div>
 				</div>
 				<div class="col-md-4">			
-  			              <iframe src="https://discord.com/widget?id=960605237775855676&theme=dark" width="380" height="300" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+  			              <iframe src="https://discord.com/widget?id=1263069257789607978&theme=dark" width="380" height="300" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
 				</div>
 			</div> <!-- end developers -->
 		</c:if>
