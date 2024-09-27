@@ -18,6 +18,9 @@
 set -e
 unset CDPATH
 
+git config core.fileMode false
+
+
 FCW_INSTALL_MODE=DFLT
 FCW_INSTALL_VND=
 FCW_INSTALL_REL=
