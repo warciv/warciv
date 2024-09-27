@@ -20,7 +20,7 @@ import java.util.Base64;
 
 
 /**
- * List errors of Warciv.net
+ * List errors of FreecivX.net
  *
  * URL: /errorlist
  */

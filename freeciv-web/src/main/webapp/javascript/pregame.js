@@ -1,5 +1,5 @@
 /**********************************************************************
-    Freeciv-web - the web version of Freeciv. http://www.Warciv.net/
+    Freeciv-web - the web version of Freeciv. http://www.FreecivX.net/
     Copyright (C) 2009-2015  The Freeciv-web project
 
     This program is free software: you can redistribute it and/or modify
@@ -1011,7 +1011,7 @@ function show_intro_dialog(title, message) {
     $("#freeciv_logo").remove();
     $("#pregame_message_area").css("width", "73%");
     $("#observe_button").remove();
-    $("#fciv-intro-txt").text("Warciv.net is a open source empire-building strategy game inspired by the history of human civilization.");
+    $("#fciv-intro-txt").text("FreecivX.net is a open source empire-building strategy game inspired by the history of human civilization.");
   }
   $("#fciv-intro").css("top", ($( window ).height() - 130) + "px");
 

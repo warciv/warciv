@@ -1,6 +1,6 @@
 /**********************************************************************
-    Warciv.net - the web version of Freeciv. https://www.Warciv.net/
-    Copyright (C) 2022 Warciv.net
+    FreecivX.net - the web version of Freeciv. https://www.FreecivX.net/
+    Copyright (C) 2022 FreecivX.net
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -17,7 +17,7 @@
 
 ***********************************************************************/
 
-// CMA for Warciv.net
+// CMA for FreecivX.net
 
 var _cma_val_sliders = [1,0,0,0,0,0];
 var _cma_min_sliders = [0,0,0,0,0,0];

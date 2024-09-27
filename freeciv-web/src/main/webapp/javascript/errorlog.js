@@ -1,6 +1,6 @@
 /**********************************************************************
-    Warciv.net - the web version of Freeciv. https://www.Warciv.net/
-    Copyright (C) 2023 Warciv.net
+    FreecivX.net - the web version of Freeciv. https://www.FreecivX.net/
+    Copyright (C) 2023 FreecivX.net
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -19,7 +19,7 @@
 
 
 /**************************************************************************
- Logs JavaScript error in Warciv.net DB.
+ Logs JavaScript error in FreecivX.net DB.
 **************************************************************************/
 function errorlog_callback(stackframes)
 {

@@ -1,4 +1,4 @@
-Warciv.net
+FreecivX.net
 ----------
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
@@ -7,19 +7,19 @@ Warciv.net
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/6a68f770365842afb89b83811e166124)](https://app.codacy.com/gh/warciv/warciv/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 
-[Warciv.net](https://www.warciv.net) is an open-source turn-based strategy game. It can be played in a web-browser which supports HTML5 and WebGL 2 or WebGPU. The game features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players (multiplayer) or play by yourself against the computer.
+[FreecivX.net](https://www.freecivx.net) is an open-source turn-based strategy game. It can be played in a web-browser which supports HTML5 and WebGL 2 or WebGPU. The game features in-depth game-play and a wide variety of game modes and options. Your goal is to build cities, collect resources, organize your government, and build an army, with the ultimate goal of creating the best civilization. You can play online against other players (multiplayer) or play by yourself against the computer.
 
-Warciv.net is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released
+FreecivX.net is free and open source software. The Freeciv C server is released under the GNU General Public License, while the Freeciv-web client is released
 under the GNU Affero General Public License. The 3D models are also "open source" and must be made free and open source. See [License](LICENSE.md) for the full license document.
 
-Warciv.net is a game about history. The developers of this game encourages peace and technological development as a winning strategy.
+FreecivX.net is a game about history. The developers of this game encourages peace and technological development as a winning strategy.
 
 
 Live servers
 ------------
-Currently known servers based on Warciv.net / Freeciv-web, which are open source in compliance with [the AGPL license](LICENSE.md):
+Currently known servers based on FreecivX.net / Freeciv-web, which are open source in compliance with [the AGPL license](LICENSE.md):
 
-https://Warciv.net
+https://FreecivX.net
 
 WARCIV screenshots:
 ------------------------
@@ -29,7 +29,7 @@ WARCIV screenshots:
 Overview
 --------
 
-Warciv.net consists of these components:
+FreecivX.net consists of these components:
 
 * [Freeciv-web](freeciv-web) - a Java web application for the Freeciv-web client.
   This application is a Java web application which make up the application
@@ -53,7 +53,7 @@ Freeciv 3D
 -------------
 Freeciv 3D is the 3D version using the Three.js 3D engine, which requires WebGl 2 or WebGPU support.
 
-Running Warciv.net on your computer
+Running FreecivX.net on your computer
 ------------------------------------
 The recommended and probably easiest way is to use Docker. Freeciv-web can also be run with WSL. In some cases it may be easier.
 

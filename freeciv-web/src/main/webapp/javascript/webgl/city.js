@@ -1,6 +1,6 @@
 /**********************************************************************
-    Warciv.net - the web version of Freeciv. http://www.Warciv.net/
-    Copyright (C) 2009-2022  The Warciv.net project
+    FreecivX.net - the web version of Freeciv. http://www.FreecivX.net/
+    Copyright (C) 2009-2022  The FreecivX.net project
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by

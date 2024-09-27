@@ -1,5 +1,5 @@
 /**********************************************************************
-    Warciv.net - the 3D web version of Freeciv. http://www.Warciv.net/
+    FreecivX.net - the 3D web version of Freeciv. http://www.FreecivX.net/
     Copyright (C) 2009-2023  The Freeciv-web project
 
     This program is free software: you can redistribute it and/or modify

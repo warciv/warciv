@@ -34,15 +34,15 @@ try {
 <!DOCTYPE html>
 <html>
 <head>
-<title>Warciv.net - Freeciv 3D browser version of the turn-based strategy game.</title>
+<title>FreecivX.net - Freeciv 3D browser version of the turn-based strategy game.</title>
 
 <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 
 <link rel="stylesheet" href="/css/fontawesome.min.css">
 <link rel="stylesheet" href="/css/solid.min.css">
 <link rel="stylesheet" type="text/css" href="/css/webclient.min.css?ts=${initParam.buildTimeStamp}" />
-<meta name="description" content="Warciv.net - play Freeciv in 3D online for free; open source strategy game">
-<meta property="og:image" content="https://Warciv.net/static/images/freeciv-webgl-splash-48.png" />
+<meta name="description" content="FreecivX.net - play Freeciv in 3D online for free; open source strategy game">
+<meta property="og:image" content="https://FreecivX.net/static/images/freeciv-webgl-splash-48.png" />
 
 <script type="text/javascript">
 var ts="${initParam.buildTimeStamp}";

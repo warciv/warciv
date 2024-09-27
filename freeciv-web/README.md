@@ -44,7 +44,7 @@ mvn flyway:migrate
 Copyright (C) 2007-2024 Andreas Røsdal. 
 Released under the GNU AFFERO GENERAL PUBLIC LICENSE.
 
-Source code, 3D models and all files part of Freeciv 3D / Warciv.net are covered by the GNU AFFERO GENERAL PUBLIC LICENSE.
-See LICENSE.txt for the AGPL license of Freeciv 3D / Warciv.net. This license means that these 3D models
+Source code, 3D models and all files part of Freeciv 3D / FreecivX.net are covered by the GNU AFFERO GENERAL PUBLIC LICENSE.
+See LICENSE.txt for the AGPL license of Freeciv 3D / FreecivX.net. This license means that these 3D models
 are free and open source, and that any modifications and redistributions must also be
 free and open source, with the AGPL license.

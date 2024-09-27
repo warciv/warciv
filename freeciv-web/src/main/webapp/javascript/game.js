@@ -1,5 +1,5 @@
 /**********************************************************************
-    Freeciv-web - the web version of Freeciv. http://www.Warciv.net/
+    Freeciv-web - the web version of Freeciv. http://www.FreecivX.net/
     Copyright (C) 2009-2015  The Freeciv-web project
 
     This program is free software: you can redistribute it and/or modify
@@ -124,7 +124,7 @@ function update_game_status_panel(force_status_on_map) {
   }
 
 
-  var page_title = "Warciv.net - " + username
+  var page_title = "FreecivX.net - " + username
                                     + "  (turn:" + game_info['turn'] + ", port:"
                                     + civserverport + ") ";
   if (server_settings['metamessage'] != null) {

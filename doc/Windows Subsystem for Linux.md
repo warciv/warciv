@@ -1,4 +1,4 @@
-Run Warciv.net on Windows Subsystem for Linux (WSL)
+Run FreecivX.net on Windows Subsystem for Linux (WSL)
 
 =================================================
 
