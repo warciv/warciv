@@ -1,2 +1,6 @@
 *	text=auto eol=lf
 
+*.sh eol=lf
+*.py eol=lf
+*.sh text exec
+*.py text exec
