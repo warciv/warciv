@@ -26,4 +26,4 @@ jobs:
           sudo rm -rf /var/lib/mysql
       - name: install
         shell: bash
-        run: ./scripts/install/install.sh --mode=TEST
+        run: bash ./scripts/install/install.sh --mode=TEST

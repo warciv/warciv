@@ -29,7 +29,7 @@ Open a Powershell window, run as Administator, this command:
 
 > cd freecivx
 
-> ./scripts/install/install.sh --mode=TEST
+> bash ./scripts/install/install.sh --mode=TEST
 
   
 

@@ -160,7 +160,7 @@ exec > >(tee "${basedir}/install.log")
 exec 2>&1
 
 echo "================================="
-echo "Running FCIV.NET setup script."
+echo "Running FREECIVX.NET setup script."
 echo "================================="
 echo
 
