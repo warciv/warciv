@@ -17,7 +17,7 @@ Live servers
 ------------
 Currently known servers based on FreecivX.net / Freeciv-web, which are open source in compliance with [the AGPL license](LICENSE.md):
 
-https://FreecivX.net
+https://FreecivX.net 
 
 WARCIV screenshots:
 ------------------------
