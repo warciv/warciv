@@ -34,7 +34,7 @@ try {
 <!DOCTYPE html>
 <html>
 <head>
-<title>FreecivX.net - Freeciv 3D browser version of the turn-based strategy game.</title>
+<title>FreecivX.net - FreecivX 3D browser version of the turn-based strategy game.</title>
 
 <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 
@@ -115,12 +115,6 @@ var webgpu = <%= webgpu %>;
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui" />
 <meta name="mobile-web-app-capable" content="yes">
 
-<meta name="google-signin-client_id" content="<%= googleSigninClientKey %>">
-
-<script>var captcha_site_key = '<%= captchaKey %>';</script>
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-    async defer>
-</script>
 
 <style>
 	/*

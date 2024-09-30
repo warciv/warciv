@@ -1177,16 +1177,6 @@ function show_new_user_account_dialog(gametype)
 
   $("#dialog").dialog('open');
 
-  if (captcha_site_key != '') {
-    if (grecaptcha !== undefined && grecaptcha != null) {
-      $('#captcha_element').html('');
-      grecaptcha.render('captcha_element', {
-            'sitekey' : captcha_site_key
-          });
-    } else {
-      swal("Captcha not available. This could be caused by a browser plugin.");
-    }
-  }
 
   $("#username").blur(function() {
    $.ajax({
@@ -1236,7 +1226,6 @@ function create_new_freeciv_user_account_request(action_type)
   var password = $("#password").val().trim();
   var confirm_password = $("#confirm_password").val().trim();
   var email = $("#email").val().trim();
-  var captcha = $("#g-recaptcha-response").val();
 
   $("#username_validation_result").show();
   if (!is_username_valid_show(username)) {
@@ -1268,7 +1257,7 @@ function create_new_freeciv_user_account_request(action_type)
   $.ajax({
    type: 'POST',
    url: "/create_pbem_user?username=" + encodeURIComponent(username) + "&email=" + encodeURIComponent(email)
-            + "&password=" + sha_password + "&captcha=" + encodeURIComponent(captcha),
+            + "&password=" + sha_password,
    success: function(data, textStatus, request){
        simpleStorage.set("username", username);
        simpleStorage.set("password", password);
@@ -1410,10 +1399,9 @@ function forgot_pbem_password()
 {
 
   var title = "Forgot your password?";
-  var message = "Please enter your e-mail address to reset your password. Also complete the captcha. The new password will be sent to you by e-mail.<br><br>"
+  var message = "Please enter your e-mail address to reset your password. The new password will be sent to you by e-mail.<br><br>"
                 + "<table><tr><td>E-mail address:</td><td><input id='email_reset' type='text' size='25'></td></tr>"
                 + "</table><br><br>"
-                + "<div id='captcha_element'></div>"
                 + "<br><br>";
 
   // reset dialog page.
@@ -1438,7 +1426,6 @@ function forgot_pbem_password()
                       return;
                     }
 				    var reset_email = $("#email_reset").val();
-				    var captcha = $("#g-recaptcha-response").val();
 				    if (reset_email == null || reset_email.length == 0) {
 				      swal("Please fill in e-mail.");
 				      return;
@@ -1449,7 +1436,7 @@ function forgot_pbem_password()
 				    }
                     $.ajax({
                        type: 'POST',
-                       url: "/reset_password?email=" + reset_email + "&captcha=" + encodeURIComponent(captcha),
+                       url: "/reset_password?email=" + reset_email,
                        success: function(data, textStatus, request){
                           swal("Password reset. Please check your email.");
                           $("#pwd_dialog").remove();
@@ -1463,17 +1450,6 @@ function forgot_pbem_password()
 		});
 
   $("#pwd_dialog").dialog('open');
-
-  if (captcha_site_key != '') {
-    if (grecaptcha !== undefined && grecaptcha != null) {
-      $('#captcha_element').html('');
-      grecaptcha.render('captcha_element', {
-            'sitekey' : captcha_site_key
-          });
-    } else {
-      swal("Captcha not available. This could be caused by a browser plugin.");
-    }
-  }
 
 }
 

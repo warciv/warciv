@@ -26,19 +26,9 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 
 import java.sql.*;
-import java.util.Properties;
-
 import javax.sql.*;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.message.BasicNameValuePair;
 import javax.naming.*;
 
 import org.freeciv.services.Validation;
@@ -57,19 +47,11 @@ public class NewPBEMUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private final Validation validation = new Validation();
-	
-	private String captchaSecret;
+
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 
-		try {
-			Properties prop = new Properties();
-			prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
-			captchaSecret = prop.getProperty("captcha_secret");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -78,7 +60,7 @@ public class NewPBEMUser extends HttpServlet {
 		String username = java.net.URLDecoder.decode(request.getParameter("username"), StandardCharsets.UTF_8);
 		String password = java.net.URLDecoder.decode(request.getParameter("password"), StandardCharsets.UTF_8);
 		String email = java.net.URLDecoder.decode(request.getParameter("email").replace("+", "%2B"), StandardCharsets.UTF_8);
-		String captcha = java.net.URLDecoder.decode(request.getParameter("captcha"), StandardCharsets.UTF_8);
+
 
 		String ipAddress = request.getHeader("X-Real-IP");
 		if (ipAddress == null) {
@@ -99,26 +81,6 @@ public class NewPBEMUser extends HttpServlet {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
 					"Invalid e-mail address. Please try again with another username.");
 			return;
-		}
-
-		/* Validate captcha against google api if a key is defined */
-		if (captchaSecret != null && captchaSecret.length() > 0) {
-			HttpClient client = HttpClientBuilder.create().build();
-			String captchaUrl = "https://www.google.com/recaptcha/api/siteverify";
-			HttpPost post = new HttpPost(captchaUrl);
-
-			List<NameValuePair> urlParameters = new ArrayList<>();
-			urlParameters.add(new BasicNameValuePair("secret", captchaSecret));
-			urlParameters.add(new BasicNameValuePair("response", captcha));
-			post.setEntity(new UrlEncodedFormEntity(urlParameters));
-
-			HttpResponse captchaResponse = client.execute(post);
-			InputStream in = captchaResponse.getEntity().getContent();
-			String body = IOUtils.toString(in, java.nio.charset.StandardCharsets.UTF_8);
-			if (!(body.contains("success") && body.contains("true"))) {
-				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Captcha failed!");
-				return;
-			}
 		}
 
 		Connection conn = null;

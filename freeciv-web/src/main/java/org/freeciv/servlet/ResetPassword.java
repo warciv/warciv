@@ -61,20 +61,6 @@ public class ResetPassword extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-
-        try {
-            Properties prop = new Properties();
-            prop.load(getServletContext().getResourceAsStream("/WEB-INF/config.properties"));
-            captchaSecret = prop.getProperty("captcha_secret");
-            emailUsername = prop.getProperty("email_username");
-            emailPassword = prop.getProperty("email_password");
-            emailHost = prop.getProperty("email_host");
-            emailPort = prop.getProperty("email_port");
-            emailSender = prop.getProperty("email_sender");
-            fcwHost = prop.getProperty("fcw_host");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
@@ -82,33 +68,12 @@ public class ResetPassword extends HttpServlet {
             throws IOException, ServletException {
 
         String email_parameter = request.getParameter("email");
-        String captcha = java.net.URLDecoder.decode(request.getParameter("captcha"), StandardCharsets.UTF_8);
         String username = "";
 
         if (email_parameter == null || email_parameter.length() <= 4 || email_parameter.length() > 90) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST,
                     "Invalid e-mail address. Please try again with another email.");
             return;
-        }
-
-        /* Validate captcha against google api if a key is defined */
-        if (captchaSecret != null && captchaSecret.length() > 0) {
-            HttpClient client = HttpClientBuilder.create().build();
-            String captchaUrl = "https://www.google.com/recaptcha/api/siteverify";
-            HttpPost post = new HttpPost(captchaUrl);
-
-            List<NameValuePair> urlParameters = new ArrayList<>();
-            urlParameters.add(new BasicNameValuePair("secret", captchaSecret));
-            urlParameters.add(new BasicNameValuePair("response", captcha));
-            post.setEntity(new UrlEncodedFormEntity(urlParameters));
-
-            HttpResponse captchaResponse = client.execute(post);
-            InputStream in = captchaResponse.getEntity().getContent();
-            String body = IOUtils.toString(in, java.nio.charset.StandardCharsets.UTF_8);
-            if (!(body.contains("success") && body.contains("true"))) {
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Captcha failed!");
-                return;
-            }
         }
 
         System.out.println("Resetting password for " + email_parameter + ".");
