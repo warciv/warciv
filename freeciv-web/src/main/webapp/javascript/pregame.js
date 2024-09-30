@@ -1145,8 +1145,7 @@ function show_new_user_account_dialog(gametype)
                 + "<tr><td>Confim password:</td><td><input id='confirm_password' type='password' size='25'></td></tr></table><br>"
                 + "<div id='username_validation_result' style='display:none;'></div><br>"
                 + "Remember your username and password, since you will need this to log in later.<br><br>"
-                + (captcha_site_key != '' ? "Click to accept captcha to show that you are real human player:<br>" : "")
-                + "<div id='captcha_element'></div><br><br>"
+                + "<br><br>"
                 + "<div id='new_user_extra_info'><small><ul><li>It is free and safe to create a new account on Freeciv-web.</li>"
                 + "<li>A user account allows you to save and load games.</li>"
                 + "<li>Other players can use your username to start Play-by-email games with you.</li>"
@@ -1239,9 +1238,6 @@ function create_new_freeciv_user_account_request(action_type)
     return false;
   } else if (password != confirm_password) {
     $("#username_validation_result").html("The passwords do not match.");
-    return false;
-  } else if (captcha_site_key != '' && captcha == null) {
-    $("#username_validation_result").html("Please fill in the captcha. You might have to disable some plugins to see the captcha.");
     return false;
   }
 
@@ -1428,10 +1424,6 @@ function forgot_pbem_password()
 				    var reset_email = $("#email_reset").val();
 				    if (reset_email == null || reset_email.length == 0) {
 				      swal("Please fill in e-mail.");
-				      return;
-				    }
-				    if (captcha_site_key != '' && (captcha == null || captcha.length == 0)) {
-				      swal("Please fill complete the captcha.");
 				      return;
 				    }
                     $.ajax({
